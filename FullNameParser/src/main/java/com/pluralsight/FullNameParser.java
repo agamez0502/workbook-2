@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class FullNameParser {
 
-    // ANSI escape codes
-    //public static final String ANSI_BOLD = "\u001B[1m";
-    //public static final String ANSI_RESET = "\u001B[0m";
-
     public static void main(String[] args) {
 
         //fire up scanner, allows user input
@@ -18,7 +14,6 @@ public class FullNameParser {
         System.out.println("------------------------------------------");
 
         //ask user for name
-        //System.out.print(ANSI_BOLD + "Enter your name: " + ANSI_RESET);
         System.out.print("Please enter your name: ");
         String name = creepyScanner.nextLine().trim(); //trims extra characters
 
