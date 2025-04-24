@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class LibraryApp {
 
+    //array of 20 classic lit books in spanish
     static Book[] theBooks = {
             new Book(1, "01111", "La casa de Bernarda Alba"),
             new Book(2, "22222", "Don Quijote"),
@@ -27,10 +28,12 @@ public class LibraryApp {
             new Book(20, "20202", "A Julia de Burgos")
     };
 
+    //fire up the scanner to allow user input
     static Scanner bookScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
+        //while loop that checks if app is still running
         boolean appRunning = true;
 
         while (appRunning) {
@@ -41,12 +44,12 @@ public class LibraryApp {
             switch (userMainMenuChoice) {
 
                 case 1:
-                    //call the view available book method to show the books
+                    //call the viewAvailableBooks method to show the books
 
                     //store the selection in userBookChoice
                     int userBookChoice = viewAvailableBooks();
 
-                    //eat the newline
+                    //eats the new line
                     bookScanner.nextLine();
 
                     //the user wanted to check out a book
@@ -60,17 +63,21 @@ public class LibraryApp {
                     }
                     break;
                 case 2:
+                    //call the viewCheckedOutBooks method to show the books
 
+                    //store the selection in bookReturn
                     int bookReturn = viewCheckedOutBooks();
 
+                    //the user wanted to check in a book
                     if (bookReturn == -1) {
                         continue;
                     }
 
                     if (bookReturn < theBooks.length) {
-
+                        //eats the new line
                         bookScanner.nextLine();
 
+                        //sets the books checked in to no one
                         theBooks[bookReturn].checkIn("no one");
 
                         System.out.println(theBooks[bookReturn].getTitle());
@@ -80,7 +87,11 @@ public class LibraryApp {
                     }
                     break;
                 case 3:
+
+                    //display for users that choose exit
                     System.out.println("The user wants to exit the library");
+
+                    //breaks the while loop
                     appRunning = false;
                     break;
                 default:
@@ -115,7 +126,8 @@ public class LibraryApp {
             //set the current book to a variable so we don't have to deal with "i" anymore
             Book currentBook = theBooks[i];
 
-            //if statement 
+            //if statement for if a book is NOT checked out
+            //display available books
             if (!currentBook.isCheckedOut()) {
                 System.out.println(i + ": " + currentBook.getTitle() + " - " + currentBook.getIsbn());
             }
@@ -124,15 +136,19 @@ public class LibraryApp {
         //eat the random line
         bookScanner.nextLine();
 
+        //displays below available books list
+        //ask user if they want to check out a book
         System.out.println("----------------------------------------------------");
         System.out.println("Would you like you like to checkout a book? (y/n) ");
         String userSelection = bookScanner.nextLine();
 
+        //if statement for if they want to check out a book
+        //ask user to enter id of book they want to check out
         if (userSelection.equalsIgnoreCase("y")) {
             System.out.println("Please enter the id of the book you would want to check out");
             return bookScanner.nextInt();
         }
-
+        //user didn't want to check out a book
         return -1;
     }
 
@@ -147,7 +163,8 @@ public class LibraryApp {
             //set the current book to a variable so we don't have to deal with "i" anymore
             Book currentBook = theBooks[i];
 
-            //if statement
+            //if statement for if a book is checked out
+            //display checked out books
             if (currentBook.isCheckedOut()) {
                 System.out.println(i + ": " + currentBook.getTitle() + " - " + currentBook.getIsbn() + " - " + currentBook.getCheckedOutTo());
             }
@@ -156,16 +173,21 @@ public class LibraryApp {
         //eat the random line
         bookScanner.nextLine();
 
+        //displays below checked out books
+        //ask user if they want to check in a book or go back to the main menu
         System.out.println("----------------------------------------------------");
         System.out.println("C: Check in a book");
         System.out.println("X: Return to main menu");
         String choice = bookScanner.nextLine();
 
+        //if statement for if they want to check in a book
+        //ask user to enter the id of the book they want to check in
         if (choice.equalsIgnoreCase("C")) {
             System.out.println("Enter the ID of the book you want to check in: ");
             int bookId = Integer.parseInt(bookScanner.nextLine());
             return bookId;
         }
+        //user didn't want to check in a book
         return -1;
     }
 }
