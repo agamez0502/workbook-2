@@ -58,13 +58,29 @@ public class LibraryApp {
                         //check out the book
                         theBooks[userBookChoice].checkOut(usersName);
                     }
-
                     break;
                 case 2:
-                    System.out.println("the user wants to see the checked out books");
+
+                    int bookReturn = viewCheckedOutBooks();
+
+                    if (bookReturn == -1) {
+                        continue;
+                    }
+
+                    if (bookReturn < theBooks.length) {
+
+                        bookScanner.nextLine();
+
+                        theBooks[bookReturn].checkIn("no one");
+
+                        System.out.println(theBooks[bookReturn].getTitle());
+                    } else {
+                        System.out.println("That book is not available for checkout!");
+                        continue;
+                    }
                     break;
                 case 3:
-                    System.out.println("the user hates the library and wants to leave");
+                    System.out.println("The user wants to exit the library");
                     appRunning = false;
                     break;
                 default:
@@ -90,6 +106,7 @@ public class LibraryApp {
 
     static int viewAvailableBooks() {
 
+        //displays above available books
         System.out.println("----------These are the available books!----------");
 
         //loop over the books and work with each book
@@ -98,7 +115,8 @@ public class LibraryApp {
             //set the current book to a variable so we don't have to deal with "i" anymore
             Book currentBook = theBooks[i];
 
-            if (currentBook.isCheckedOut() == false) {
+            //if statement 
+            if (!currentBook.isCheckedOut()) {
                 System.out.println(i + ": " + currentBook.getTitle() + " - " + currentBook.getIsbn());
             }
         }
@@ -115,6 +133,39 @@ public class LibraryApp {
             return bookScanner.nextInt();
         }
 
+        return -1;
+    }
+
+    static int viewCheckedOutBooks() {
+
+        //displays above available books
+        System.out.println("----------These books are currently checked out!----------");
+
+        //loop over the books and work with each book
+        for (int i = 0; i < theBooks.length; i++) {
+
+            //set the current book to a variable so we don't have to deal with "i" anymore
+            Book currentBook = theBooks[i];
+
+            //if statement
+            if (currentBook.isCheckedOut()) {
+                System.out.println(i + ": " + currentBook.getTitle() + " - " + currentBook.getIsbn() + " - " + currentBook.getCheckedOutTo());
+            }
+        }
+
+        //eat the random line
+        bookScanner.nextLine();
+
+        System.out.println("----------------------------------------------------");
+        System.out.println("C: Check in a book");
+        System.out.println("X: Return to main menu");
+        String choice = bookScanner.nextLine();
+
+        if (choice.equalsIgnoreCase("C")) {
+            System.out.println("Enter the ID of the book you want to check in: ");
+            int bookId = Integer.parseInt(bookScanner.nextLine());
+            return bookId;
+        }
         return -1;
     }
 }
