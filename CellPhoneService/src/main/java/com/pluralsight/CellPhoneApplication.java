@@ -45,20 +45,38 @@ public class CellPhoneApplication {
         iPhone2.setPhoneNumber("972-743-2970");
         iPhone2.setOwner("Alondra");
 
+        //create cellphone 3
+        CellPhone android = new CellPhone();
+        android.setSerialNumber(333);
+        android.setModel("Galaxy S");
+        android.setCarrier("ATT");
+        android.setPhoneNumber("214-470-6318");
+        android.setOwner("Claudia");
+
+        //use the display method instead to display cellphone 1
         System.out.println("--------Information for iPhone1--------");
         //use the display method instead
         display(iPhone1);
 
+        //use the display method instead to display cellphone 2
         System.out.println("--------Information for iPhone2--------");
-        //use the display method instead
         display(iPhone2);
 
+        //use the display method instead to display cellphone 3
+        System.out.println("--------Information for Android--------");
+        display(android);
+
+        System.out.println("-----------Who's calling who?-----------");
         //have iPhone1 call iPhone2
         iPhone1.dial(iPhone2.getPhoneNumber());
 
         //have iPhone2 call iPhone1
         iPhone2.dial(iPhone1.getPhoneNumber());
+
+        //have android call iPhone2
+        android.dial("972-743-2970");
     }
+
     //this method knows how to display the information for a phone
     static void display(CellPhone phone) {
         System.out.println("SN: " + phone.getSerialNumber());
