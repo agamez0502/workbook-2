@@ -82,4 +82,4 @@ Welcome to **Workbook 2**, a continuation of Java fundamentals focusing on Intel
 
 ### ✨ Final Slay Note  
 Great code starts with great fundamentals — strings, loops, arrays, and clean IntelliJ workflows.  
-Build confidently, debug intentionally, and always keep your logic cute and correct. 💅💻  
+Build confidently and debug intentionally. 💅💻  
